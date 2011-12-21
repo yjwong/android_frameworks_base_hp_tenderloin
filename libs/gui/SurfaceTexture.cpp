@@ -876,7 +876,9 @@ status_t SurfaceTexture::updateTexImage() {
         if (failed) {
             return -EINVAL;
         }
-
+#ifdef QCOM_HARDWARE
+      }
+#endif
         if (mCurrentTexture != INVALID_BUFFER_SLOT) {
             if (mUseFenceSync) {
                 EGLSyncKHR fence = eglCreateSyncKHR(dpy, EGL_SYNC_FENCE_KHR,
