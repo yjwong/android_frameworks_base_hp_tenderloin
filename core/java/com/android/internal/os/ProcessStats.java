@@ -154,7 +154,7 @@ public class ProcessStats {
 
     private boolean mFirst = true;
 
-    private byte[] mBuffer = new byte[256];
+    private byte[] mBuffer = new byte[512];
 
     /**
      * The time in microseconds that the CPU has been running at each speed.
@@ -556,7 +556,7 @@ public class ProcessStats {
     private long[] getCpuSpeedTimes(long[] out) {
         long[] tempTimes = out;
         long[] tempSpeeds = mCpuSpeeds;
-        final int MAX_SPEEDS = 20;
+        final int MAX_SPEEDS = 40;
         if (out == null) {
             tempTimes = new long[MAX_SPEEDS]; // Hopefully no more than that
             tempSpeeds = new long[MAX_SPEEDS];
@@ -568,6 +568,7 @@ public class ProcessStats {
             StringTokenizer st = new StringTokenizer(file, "\n ");
             while (st.hasMoreElements()) {
                 String token = st.nextToken();
+		Slog.i(TAG, "Token: " + token);
                 try {
                     long val = Long.parseLong(token);
                     tempSpeeds[speed] = val;
